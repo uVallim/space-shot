@@ -1,0 +1,241 @@
+:root {
+    --primary-color: #00d2ff;
+    --secondary-color: #9d50bb;
+    --accent-glow: rgba(0, 210, 255, 0.5);
+    --bg-dark: #050505;
+    --text-color: #ffffff;
+    --danger: #ff4b2b;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Outfit', sans-serif;
+}
+
+body {
+    background-color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    color: var(--text-color);
+}
+
+#game-container {
+    position: relative;
+    width: 640px;
+    height: 480px;
+    box-shadow: 0 0 50px rgba(0, 210, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    background-color: var(--bg-dark);
+}
+
+#gameCanvas {
+    display: block;
+    image-rendering: pixelated;
+}
+
+/* HUD Styling */
+#hud {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.hud-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    opacity: 0.7;
+    margin-bottom: 5px;
+}
+
+#score-value {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--primary-color);
+    text-shadow: 0 0 10px var(--accent-glow);
+}
+
+#lives-icons {
+    display: flex;
+    gap: 8px;
+}
+
+.life-icon {
+    width: 20px;
+    height: 20px;
+    background: url('assets/player_ship.png') no-repeat center center;
+    background-size: contain;
+    filter: drop-shadow(0 0 5px var(--accent-glow));
+}
+
+/* Boss Health Bar */
+#boss-hud {
+    position: absolute;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+    text-align: center;
+    transition: opacity 0.5s;
+}
+
+#boss-health-bar {
+    width: 100%;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-top: 5px;
+    box-shadow: 0 0 10px rgba(255, 0, 255, 0.3);
+}
+
+#boss-health-fill {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, #9d50bb, #6e48aa);
+    transition: width 0.3s ease-out;
+}
+
+/* Overlays */
+#overlay,
+#start-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 20;
+    backdrop-filter: blur(5px);
+}
+
+h1 {
+    font-size: 48px;
+    letter-spacing: 8px;
+    margin-bottom: 20px;
+    background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 20px rgba(0, 210, 255, 0.3);
+}
+
+#stats-container {
+    margin: 20px 0;
+    text-align: center;
+    font-size: 18px;
+    line-height: 2;
+}
+
+.premium-btn {
+    padding: 12px 30px;
+    background: transparent;
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+.premium-btn:hover {
+    background: var(--primary-color);
+    color: #000;
+    box-shadow: 0 0 20px var(--accent-glow);
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Animations */
+@keyframes shake {
+    0% {
+        transform: translate(1px, 1px) rotate(0deg);
+    }
+
+    10% {
+        transform: translate(-1px, -2px) rotate(-1deg);
+    }
+
+    20% {
+        transform: translate(-3px, 0px) rotate(1deg);
+    }
+
+    30% {
+        transform: translate(3px, 2px) rotate(0deg);
+    }
+
+    40% {
+        transform: translate(1px, -1px) rotate(1deg);
+    }
+
+    50% {
+        transform: translate(-1px, 2px) rotate(-1deg);
+    }
+
+    60% {
+        transform: translate(-3px, 1px) rotate(0deg);
+    }
+
+    70% {
+        transform: translate(3px, 1px) rotate(-1deg);
+    }
+
+    80% {
+        transform: translate(-1px, -1px) rotate(1deg);
+    }
+
+    90% {
+        transform: translate(1px, 2px) rotate(0deg);
+    }
+
+    100% {
+        transform: translate(1px, -2px) rotate(-1deg);
+    }
+}
+
+.shake {
+    animation: shake 0.5s;
+}
+
+.flash {
+    animation: flash-anim 0.2s;
+}
+
+@keyframes flash-anim {
+    0% {
+        filter: brightness(1);
+    }
+
+    50% {
+        filter: brightness(3);
+    }
+
+    100% {
+        filter: brightness(1);
+    }
+}
